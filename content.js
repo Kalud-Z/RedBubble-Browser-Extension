@@ -70,8 +70,39 @@ createCenterAllButtons(runCapitalCase);
 
 
 
+// Tags counter: ###########################################################################################################################
+
+let tagsTextArea = document.getElementById('work_tag_field_en');
+if(tagsTextArea) {
+    const tagsTextArea_parent = tagsTextArea.parentElement;
+
+    let count = getNumberOfTags(tagsTextArea.value);
+    let tagsCounter = document.createElement('div');
+    tagsCounter.innerText = 'Total Number of Tags : ' + count;
+    tagsCounter.style.backgroundColor = '#ff6666';
+    tagsCounter.style.color = 'white';
+    tagsCounter.style.margin = '20px';
+    tagsCounter.style.padding = '10px';
+    tagsCounter.style.fontSize = '20px';
+    tagsCounter.style.width = '55%';
+    tagsCounter.style.textAlign = 'center';
+    tagsCounter.style.borderRadius = '11px';
+    tagsTextArea_parent.appendChild(tagsCounter);
+
+    tagsTextArea.addEventListener('change', (event) => {
+        let tags = event.target.value;
+        let numOfTags = getNumberOfTags(tags);
+        tagsCounter.innerText = 'Total Number of Tags : ' + numOfTags;
+    });
 
 
-
+    function getNumberOfTags(tagsString) {
+        if(tagsString.length === 0) { return 0 }
+        let arrayOfTags = tagsString.split(',');
+        let finalNumberOfTags = arrayOfTags.length;
+        if(tagsString.trim()[tagsString.length-1] === ',') { finalNumberOfTags =  arrayOfTags.length - 1 }
+        return finalNumberOfTags;
+    }
+}
 
 
